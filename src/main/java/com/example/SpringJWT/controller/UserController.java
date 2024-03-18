@@ -24,5 +24,9 @@ public class UserController {
     public  ResponseEntity<AuthenticationResponse> loginUser(@RequestBody UserLogIn userLogIn){
         return  ResponseEntity.ok().body(userService.loginInuser(userLogIn));
     }
+    @DeleteMapping("/removeUser/{id}")
+    public  String removeUser(@PathVariable("id") Integer id){
+        return userService.deleteUser(id);
+    }
 
 }

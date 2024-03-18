@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @RequiredArgsConstructor
@@ -22,14 +23,14 @@ public class SecurityConfiguration  {
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.
                 csrf(AbstractHttpConfigurer::disable).
-                authorizeHttpRequests(auth -> auth.requestMatchers("/")
+                authorizeHttpRequests(auth -> auth.requestMatchers("/api/v1/**")
                         .permitAll()
                         .anyRequest()
                         .authenticated()
                 )
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider)
-                .addFilter(jwtAuthFilter);
+                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
         return  httpSecurity.build();
     }
 }

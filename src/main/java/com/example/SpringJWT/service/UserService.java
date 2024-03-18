@@ -13,6 +13,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class UserService {
@@ -23,6 +25,8 @@ public class UserService {
 
 
     public AuthenticationResponse registerUser(UserSignIn userSignIn){
+        System.out.println(userSignIn.getUsername());
+        System.out.println(userSignIn.getPassword());
         var user = Users.builder()
                 .username(userSignIn.getUsername())
                 .email(userSignIn.getEmail())
@@ -50,4 +54,12 @@ public class UserService {
                 .build();
     }
 
+    public String deleteUser(Integer id) {
+        Optional<Users> user = userRepository.findById(id);
+        if(user.isPresent()){
+            userRepository.deleteById(id);
+            return ("User with id : " + id + "deleted");
+        }
+        else {return ("Something went wrong");}
+    }
 }
