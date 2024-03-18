@@ -28,7 +28,7 @@ public class UserService {
         var user = Users.builder()
                 .username(userSignIn.getUsername())
                 .email(userSignIn.getEmail())
-                .Password(passwordEncoder.encode(userSignIn.getPassword()))
+                .password(passwordEncoder.encode(userSignIn.getPassword()))
                 .role(Role.USER)
                 .build();
         userRepository.save(user);
@@ -37,7 +37,7 @@ public class UserService {
                 .token(jwtToken)
                 .build();
     }
-    public  AuthenticationResponse loginInuser(UserLogIn userLogIn){
+    public  AuthenticationResponse loginInUser(UserLogIn userLogIn){
         authManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         userLogIn.getUsername(),
@@ -56,7 +56,7 @@ public class UserService {
         Optional<Users> user = userRepository.findById(id);
         if(user.isPresent()){
             userRepository.deleteById(id);
-            return ("User with id : " + id + "deleted");
+            return ("User with id :  " + id + "deleted");
         }
         else {return ("Something went wrong");}
     }

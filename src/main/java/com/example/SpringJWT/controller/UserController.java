@@ -22,7 +22,7 @@ public class UserController {
 
     @PostMapping("/login")
     public  ResponseEntity<AuthenticationResponse> loginUser(@RequestBody UserLogIn userLogIn){
-        return  ResponseEntity.ok().body(userService.loginInuser(userLogIn));
+        return  ResponseEntity.ok().body(userService.loginInUser(userLogIn));
     }
     @DeleteMapping("/removeUser/{id}")
     public  String removeUser(@PathVariable("id") Integer id){
