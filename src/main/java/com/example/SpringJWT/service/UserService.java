@@ -25,8 +25,6 @@ public class UserService {
 
 
     public AuthenticationResponse registerUser(UserSignIn userSignIn){
-        System.out.println(userSignIn.getUsername());
-        System.out.println(userSignIn.getPassword());
         var user = Users.builder()
                 .username(userSignIn.getUsername())
                 .email(userSignIn.getEmail())
