@@ -30,7 +30,7 @@ public class SecurityConfiguration  {
                 )
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider)
-                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
+                .addFilterAt(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
         return  httpSecurity.build();
     }
 }
